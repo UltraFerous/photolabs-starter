@@ -1,4 +1,6 @@
 import React from "react";
+import PhotoFavButton from './PhotoFavButton';
+
 
 import "../styles/PhotoListItem.scss";
 
@@ -6,12 +8,13 @@ const PhotoListItem = (props) => {
   /* Insert React */
   return (
     <div className="photo-list__item">
-      <img className="photo-list__image" src={props.sampleDataForPhotoListItem.imageSource} alt="" />
+      <PhotoFavButton item={props.item} setLikedPicture={props.setLikedPicture} />
+      <img className="photo-list__image" src={props.item.urls.regular} alt="" />
       <div className="photo-list__user-details">
-        <img className="photo-list__user-profile" src={props.sampleDataForPhotoListItem.profile} alt="" />
+        <img className="photo-list__user-profile" src={props.item.user.profile} alt="" />
         <div>
-        <div className="photo-list__user-info"> {props.sampleDataForPhotoListItem.username} </div>
-        <div className="photo-list__user-location"> {props.sampleDataForPhotoListItem.location.city} {props.sampleDataForPhotoListItem.location.country} </div>
+        <div className="photo-list__user-info"> {props.item.user.username} </div>
+        <div className="photo-list__user-location"> {props.item.location.city} {props.item.location.country} </div>
         </div>
       </div>
     </div>

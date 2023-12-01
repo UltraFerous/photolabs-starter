@@ -3,17 +3,17 @@ import React, { useCallback, useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-
-function PhotoFavButton() {
+function PhotoFavButton(props) {
   const [like, setLike] = useState(0);
 
   const changeLike = function() {
+    (like === 0 ? props.setLikedPicture(props.item, 1) : props.setLikedPicture(props.item, 0));
     (like === 0 ? setLike(1) : setLike(0));
     return;
   };
 
   return (
-    <div className="photo-list__fav-icon" onClick={changeLike}>
+    <div className="photo-list__fav-icon" onClick={() => {changeLike();}} >
       <div className="photo-list__fav-icon-svg">
         {like === 0 && <div><FavIcon displayAlert={false} selected={false} /></div>}
         {like === 1 && <div><FavIcon displayAlert={false} selected={true} /></div>}
@@ -22,4 +22,4 @@ function PhotoFavButton() {
   );
 }
 
-export default PhotoFavButton;;
+export default PhotoFavButton;
