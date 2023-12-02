@@ -60,7 +60,6 @@ const PhotoList = (props) => {
   return (
     <ul className="photo-list">
       {(props.photos).map((item, index) => {
-        console.log(props.photos);
         return <PhotoListItem key={index + 1} item={item} setLikedPicture={props.setLikedPicture} />;
       })}
     </ul>
