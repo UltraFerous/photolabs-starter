@@ -1,16 +1,13 @@
 import React, { useCallback, useState } from 'react';
-
+import useApplicationData from '../hooks/useApplicationData.js'
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton(props) {
-  const [like, setLike] = useState(0);
-
-  const changeLike = function() {
-    (like === 0 ? props.setLikedPicture(props.item, 1) : props.setLikedPicture(props.item, 0));
-    (like === 0 ? setLike(1) : setLike(0));
-    return;
-  };
+  const {
+    like,
+    changeLike,
+  } = useApplicationData(props);
 
   return (
     <div className="photo-list__fav-icon" onClick={() => {changeLike();}} >

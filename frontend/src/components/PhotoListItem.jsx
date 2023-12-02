@@ -2,15 +2,14 @@ import { React, useState } from "react";
 import PhotoFavButton from './PhotoFavButton';
 import PhotoDetailsModal from '../routes/PhotoDetailsModal';
 import "../styles/PhotoListItem.scss";
+import useApplicationData from '../hooks/useApplicationData.js'
 
 const PhotoListItem = (props) => {
   /* Insert React */
-  const [open, setOpen] = useState(false);
-
-  const openPreview = function(input) {
-    input ? setOpen(true) : setOpen(false);
-    return open;
-  };
+  const {
+    open,
+    openPreview,
+  } = useApplicationData(props);
 
   return (
     <div className="photo-list__item">

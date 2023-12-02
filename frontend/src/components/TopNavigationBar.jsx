@@ -3,8 +3,14 @@ import TopicList from 'components/TopicList';
 import FavIcon from './FavIcon';
 import topics from '../mocks/topics';
 import '../styles/TopNavigationBar.scss';
+import useApplicationData from '../hooks/useApplicationData.js';
 
 const TopNavigation = (props) => {
+
+  const {
+    setAlertNote,
+  } = useApplicationData(props);
+
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
