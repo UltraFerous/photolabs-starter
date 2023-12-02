@@ -10,6 +10,7 @@ const HomeRoute = function() {
   const [liked, setLiked] = useState([]);
   const [alert, setAlert] = useState(0);
 
+
   const setLikedPicture = function(likedPicture, input) {
     const likedArr = [...liked];
     const index = likedArr.findIndex((pic) => pic.id === likedPicture.id);
@@ -26,8 +27,10 @@ const HomeRoute = function() {
   const setAlertNote = function(input) {
     (input === 0 && setAlert(0));
     (input === 1 && setAlert(1));
-    return alert
+    return alert;
   };
+
+
 
   return (
     <div className='home-route'>

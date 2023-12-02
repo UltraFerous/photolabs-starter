@@ -1,7 +1,5 @@
 import React from "react";
 import PhotoListItem from './PhotoListItem';
-
-
 import "../styles/PhotoList.scss";
 
 // const sampleDataForPhotoList = [
@@ -62,7 +60,8 @@ const PhotoList = (props) => {
   return (
     <ul className="photo-list">
       {(props.photos).map((item, index) => {
-        return <PhotoListItem key={index + 1} item={item} setLikedPicture={props.setLikedPicture}/>;
+        console.log(props.photos);
+        return <PhotoListItem key={index + 1} item={item} setLikedPicture={props.setLikedPicture} />;
       })}
     </ul>
   );
