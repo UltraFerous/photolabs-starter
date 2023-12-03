@@ -8,7 +8,8 @@ const useApplicationData = function(props) {
     liked: [],
     like: 0,
     photoData: [],
-    topicData: []
+    topicData: [],
+    currentTopic: 0
   };
 
   const ACTIONS = {
@@ -46,7 +47,6 @@ const useApplicationData = function(props) {
       return { ...state, liked: action.payload };
     }
     if (action.type === "ALERT_TRUE") {
-      console.log("AELET");
       return { ...state, alert: 1 };
     }
     if (action.type === "ALERT_FALSE") {
@@ -70,10 +70,32 @@ const useApplicationData = function(props) {
     if (action.type === "SET_TOPICS") {
       return { ...state, topicData: action.payload };
     }
+    if (action.type === "CHANGE_TOPIC") {
+      return { ...state, currentTopic: action.payload };
+    }
     return state;
   };
 
   const [state, dispatch] = useReducer(reducer, STATES);
+
+  useEffect(() => {
+    if (state.currentTopic >= 1 && state.currentTopic <= 5)
+      fetch(`http://localhost:8001/api/topics/photos/${state.currentTopic}`)
+        .then(res => res.json())
+        .then(data => {
+          let newTopicPhotos = [...state.photoData];
+          newTopicPhotos = data;
+          dispatch({ type: "SET_PHOTOS", payload: newTopicPhotos });
+        });
+    if (state.currentTopic === -1)
+      fetch(`http://localhost:8001/api/photos`)
+        .then(res => res.json())
+        .then(data => {
+          let newTopicPhotos = [...state.photoData];
+          newTopicPhotos = data;
+          dispatch({ type: "SET_PHOTOS", payload: newTopicPhotos });
+        });
+  }, [state.currentTopic]);
 
   const setLikedPicture = function(likedPicture, input) {
     const likedArr = [...state.liked];
@@ -113,7 +135,11 @@ const useApplicationData = function(props) {
     return open;
   };
 
-  return { setLikedPicture, setPhotoSelected, setAlertNote, changeLike, openPreview, state };
+  const setTopic = function(id) {
+    dispatch({ type: "CHANGE_TOPIC", payload: id });
+  };
+
+  return { setLikedPicture, setPhotoSelected, setAlertNote, changeLike, openPreview, setTopic, state };
 };
 
 export default useApplicationData;

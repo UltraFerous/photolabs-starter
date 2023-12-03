@@ -11,12 +11,13 @@ const HomeRoute = function() {
   const {
     setLikedPicture,
     setAlertNote,
+    setTopic,
     state
   } = useApplicationData();
 
   return (
     <div className='home-route'>
-      <TopNavigation setAlertNote={setAlertNote} alert={state.alert} topics={state.topicData}/>
+      <TopNavigation setAlertNote={setAlertNote} alert={state.alert} topics={state.topicData} setTopic={setTopic}/>
       <PhotoList photos={state.photoData} setLikedPicture={setLikedPicture} />
     </div>
   );
