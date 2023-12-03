@@ -16,8 +16,8 @@ const HomeRoute = function() {
 
   return (
     <div className='home-route'>
-      <TopNavigation setAlertNote={setAlertNote} alert={state.alert}/>
-      <PhotoList photos={photos} setLikedPicture={setLikedPicture} />
+      <TopNavigation setAlertNote={setAlertNote} alert={state.alert} topics={state.topicData}/>
+      <PhotoList photos={state.photoData} setLikedPicture={setLikedPicture} />
     </div>
   );
 };

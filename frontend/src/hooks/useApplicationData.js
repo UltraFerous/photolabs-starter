@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 
 const useApplicationData = function(props) {
 
@@ -6,7 +6,9 @@ const useApplicationData = function(props) {
     alert: 0,
     open: false,
     liked: [],
-    like: 0
+    like: 0,
+    photoData: [],
+    topicData: []
   };
 
   const ACTIONS = {
@@ -20,6 +22,22 @@ const useApplicationData = function(props) {
     LIKE_FALSE: 'LIKE_FALSE'
   };
 
+  useEffect(() => {
+    fetch('http://localhost:8001/api/photos')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "SET_PHOTOS", payload: data });
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/topics')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "SET_TOPICS", payload: data });
+      });
+  }, []);
+
   const reducer = function(state, action) {
     if (action.type === "LIKED_PHOTO_ADDED") {
       return { ...state, liked: action.payload };
@@ -28,7 +46,7 @@ const useApplicationData = function(props) {
       return { ...state, liked: action.payload };
     }
     if (action.type === "ALERT_TRUE") {
-      console.log("AELET")
+      console.log("AELET");
       return { ...state, alert: 1 };
     }
     if (action.type === "ALERT_FALSE") {
@@ -45,6 +63,12 @@ const useApplicationData = function(props) {
     }
     if (action.type === "LIKE_FALSE") {
       return { ...state, like: 0 };
+    }
+    if (action.type === "SET_PHOTOS") {
+      return { ...state, photoData: action.payload };
+    }
+    if (action.type === "SET_TOPICS") {
+      return { ...state, topicData: action.payload };
     }
     return state;
   };
