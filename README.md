@@ -1,7 +1,13 @@
-# react-photolabs
-The PhotoLabs project for the Web Development React course programming.
+# PhotoLabs React Project
 
-# Photolabs
+PhotoLabs is a simple, single-page Pinterest clone. In this project, the homepage connects to two APIs to display a variety of topics and photos. Users can like photos, which will trigger a notification in the top right, and can open a modal where they can view the high-resolution image and discover similar photos.
+
+The PhotoLabs project for the Web Development React course programming. 
+
+
+## Screenshots
+!["The main page on desktop."](https://github.com/UltraFerous/photolabs-starter/docs/homepage.jpg)
+!["The modal on desktop."](https://github.com/UltraFerous/photolabs-starter/docs/modal.jpg)
 
 ## Setup
 
