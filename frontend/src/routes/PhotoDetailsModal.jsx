@@ -6,9 +6,15 @@ import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
 const PhotoDetailsModal = (props) => {
+  const similarPhotosIds = Object.values(props.item.similar_photos);
+  const similarPhotos = similarPhotosIds.map((photo) => {
+    const photoObj = props.photoData.find(ph => ph.id === photo.id);
+    return photoObj;
+  })
+
   return (
     <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button" onClick={() => { props.openPreview(false); console.log(props.item); }}>
+      <button className="photo-details-modal__close-button" onClick={() => props.closePreview()}>
         <img src={closeSymbol} alt="close symbol" />
       </button>
       <div className="photo-details-modal__images">
@@ -24,8 +30,8 @@ const PhotoDetailsModal = (props) => {
 
         <div className="photo-details-modal__header"> SIMILAR PHOTOS </div>
 
-        <div className="photo-details-modal__image" onClick={() => console.log("PHOTOLIST:", Object.values(props.item.similar_photos))}>
-          <PhotoList photos={Object.values(props.item.similar_photos)} setLikedPicture={props.setLikedPicture}/>
+        <div className="photo-details-modal__image" >
+          <PhotoList photos={similarPhotos} setLikedPicture={props.setLikedPicture} openPreview = {props.openPreview}/>
         </div>
       </div>
     </div>

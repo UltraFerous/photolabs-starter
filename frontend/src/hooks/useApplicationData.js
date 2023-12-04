@@ -4,7 +4,7 @@ const useApplicationData = function(props) {
 
   const STATES = {
     alert: 0,
-    open: false,
+    open: null,
     liked: [],
     like: 0,
     photoData: [],
@@ -24,7 +24,7 @@ const useApplicationData = function(props) {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8001/api/photos')
+    fetch('/api/photos')
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "SET_PHOTOS", payload: data });
@@ -32,7 +32,7 @@ const useApplicationData = function(props) {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8001/api/topics')
+    fetch('/api/topics')
       .then(res => res.json())
       .then(data => {
         dispatch({ type: "SET_TOPICS", payload: data });
@@ -53,10 +53,10 @@ const useApplicationData = function(props) {
       return { ...state, alert: 0 };
     }
     if (action.type === "OPEN_TRUE") {
-      return { ...state, open: true };
+      return { ...state, open: action.payload };
     }
     if (action.type === "OPEN_FALSE") {
-      return { ...state, open: false };
+      return { ...state, open: null };
     }
     if (action.type === "LIKE_TRUE") {
       return { ...state, like: 1 };
@@ -80,7 +80,7 @@ const useApplicationData = function(props) {
 
   useEffect(() => {
     if (state.currentTopic >= 1 && state.currentTopic <= 5)
-      fetch(`http://localhost:8001/api/topics/photos/${state.currentTopic}`)
+      fetch(`/api/topics/photos/${state.currentTopic}`)
         .then(res => res.json())
         .then(data => {
           let newTopicPhotos = [...state.photoData];
@@ -88,7 +88,7 @@ const useApplicationData = function(props) {
           dispatch({ type: "SET_PHOTOS", payload: newTopicPhotos });
         });
     if (state.currentTopic === -1)
-      fetch(`http://localhost:8001/api/photos`)
+      fetch(`/api/photos`)
         .then(res => res.json())
         .then(data => {
           let newTopicPhotos = [...state.photoData];
@@ -131,15 +131,18 @@ const useApplicationData = function(props) {
   };
 
   const openPreview = function(input) {
-    input ? dispatch({ type: "OPEN_TRUE" }) : dispatch({ type: "OPEN_FALSE" });
-    return open;
+    dispatch({ type: "OPEN_TRUE", payload: input });
   };
+  
+  const closePreview = function(){
+    dispatch({ type: "OPEN_FALSE" });
+  }
 
   const setTopic = function(id) {
     dispatch({ type: "CHANGE_TOPIC", payload: id });
   };
 
-  return { setLikedPicture, setPhotoSelected, setAlertNote, changeLike, openPreview, setTopic, state };
+  return { setLikedPicture, setPhotoSelected, setAlertNote, changeLike, openPreview, setTopic, closePreview, state };
 };
 
 export default useApplicationData;
