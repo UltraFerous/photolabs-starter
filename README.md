@@ -6,8 +6,8 @@ The PhotoLabs project for the Web Development React course programming.
 
 
 ## Screenshots
-!["The main page on desktop."](https://github.com/UltraFerous/photolabs-starter/docs/homepage.jpg)
-!["The modal on desktop."](https://github.com/UltraFerous/photolabs-starter/docs/modal.jpg)
+!["The main page on desktop."](https://github.com/UltraFerous/photolabs-starter/blob/main/docs/homepage.jpg)
+!["The modal on desktop."](https://github.com/UltraFerous/photolabs-starter/blob/main/docs/modal.jpg)
 
 ## Setup
 
