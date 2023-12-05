@@ -60,7 +60,7 @@ const PhotoList = (props) => {
   return (
     <ul className="photo-list">
       {(props.photos).map((item, index) => {
-        return <PhotoListItem key={item.id} item={item} setLikedPicture={props.setLikedPicture} openPreview={props.openPreview} liked={props.liked}/>;
+        return <PhotoListItem likedChecker={props.likedChecker} changeLike={props.changeLike} key={item.id} item={item} setLikedPicture={props.setLikedPicture} openPreview={props.openPreview} liked={props.liked}/>;
       })}
     </ul>
   );

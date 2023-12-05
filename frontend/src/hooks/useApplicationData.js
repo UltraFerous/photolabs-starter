@@ -143,8 +143,8 @@ const useApplicationData = function(props) {
     return state.alert;
   };
 
-  const changeLike = function() {
-    (state.like === 0 ? props.setLikedPicture(props.item, 1) : props.setLikedPicture(props.item, 0));
+  const changeLike = function(item) {
+    (state.like === 0 ? setLikedPicture(item, 1) : setLikedPicture(item, 0));
     (state.like === 0 ? dispatch({ type: "LIKE_TRUE" }) : dispatch({ type: "LIKE_FALSE" }));
     return;
   };

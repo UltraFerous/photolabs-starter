@@ -2,15 +2,15 @@ import { React, useState } from "react";
 import PhotoFavButton from './PhotoFavButton';
 import PhotoDetailsModal from '../routes/PhotoDetailsModal';
 import "../styles/PhotoListItem.scss";
-import useApplicationData from '../hooks/useApplicationData.js'
+import useApplicationData from '../hooks/useApplicationData.js';
 
 const PhotoListItem = (props) => {
   /* Insert React */
 
   return (
     <div className="photo-list__item">
-      <PhotoFavButton item={props.item} setLikedPicture={props.setLikedPicture} liked={props.liked}/>
-      <img className="photo-list__image" src={props.item.urls.regular} alt="" onClick={() => props.openPreview(props.item) } />
+      <PhotoFavButton item={props.item} likedChecker={props.likedChecker} changeLike={props.changeLike} setLikedPicture={props.setLikedPicture} liked={props.liked} />
+      <img className="photo-list__image" src={props.item.urls.regular} alt="" onClick={() => props.openPreview(props.item)} />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={props.item.user.profile} alt="" />
         <div>

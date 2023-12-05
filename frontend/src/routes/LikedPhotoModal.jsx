@@ -14,7 +14,7 @@ const likedPhotoModal = (props) => {
       </button>
 
       <div className="liked-details-modal__image" >
-        <PhotoList photos={props.likedPhotoData} liked={props.likedPhotoData} setLikedPicture={props.setLikedPicture} openPreview={props.openPreview} />
+        <PhotoList likedChecker={props.likedChecker} changeLike={props.changeLike} photos={props.likedPhotoData} liked={props.likedPhotoData} setLikedPicture={props.setLikedPicture} openPreview={props.openPreview} />
       </div>
     </div>
   );
