@@ -9,7 +9,9 @@ const useApplicationData = function(props) {
     like: 0,
     photoData: [],
     topicData: [],
-    currentTopic: 0
+    currentTopic: 0,
+    likeButton: false,
+    likedDisplay: false
   };
 
   const ACTIONS = {
@@ -73,6 +75,18 @@ const useApplicationData = function(props) {
     if (action.type === "CHANGE_TOPIC") {
       return { ...state, currentTopic: action.payload };
     }
+    if (action.type === "SHOW_LIKED_LIST") {
+      return { ...state, likedDisplay: true };
+    }
+    if (action.type === "HIDE_LIKED_LIST") {
+      return { ...state, likedDisplay: false };
+    }
+    if (action.type === "SHOW_LIKE_BUTTON") {
+      return { ...state, likeButton: true };
+    }
+    if (action.type === "HIDE_LIKE_BUTTON") {
+      return { ...state, likeButton: false };
+    }
     return state;
   };
 
@@ -113,6 +127,11 @@ const useApplicationData = function(props) {
     return state.liked;
   };
 
+  const displayLikedPhotos = function() {
+    const likedPicArr = [...state.liked];
+    dispatch({ type: "SET_PHOTOS", payload: likedPicArr });
+  };
+
   const setPhotoSelected = function(input) {
     input ? dispatch({ type: "OPEN_TRUE" }) : dispatch({ type: "OPEN_FALSE" });
     return open;
@@ -133,16 +152,29 @@ const useApplicationData = function(props) {
   const openPreview = function(input) {
     dispatch({ type: "OPEN_TRUE", payload: input });
   };
-  
-  const closePreview = function(){
+
+  const closePreview = function() {
     dispatch({ type: "OPEN_FALSE" });
-  }
+  };
 
   const setTopic = function(id) {
     dispatch({ type: "CHANGE_TOPIC", payload: id });
   };
 
-  return { setLikedPicture, setPhotoSelected, setAlertNote, changeLike, openPreview, setTopic, closePreview, state };
+  const setLikedDisplay = function(input) {
+    input ? dispatch({ type: "SHOW_LIKED_LIST" }) : dispatch({ type: "HIDE_LIKED_LIST" });
+  };
+
+  const likedChecker = function(id, likedArray) {
+    for (let likePho of likedArray) {
+      if (likePho.id === id) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  return { setLikedPicture, likedChecker, setLikedDisplay, setPhotoSelected, setAlertNote, changeLike, openPreview, setTopic, closePreview, displayLikedPhotos, state };
 };
 
 export default useApplicationData;

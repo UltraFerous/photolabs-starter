@@ -18,7 +18,7 @@ const PhotoDetailsModal = (props) => {
         <img src={closeSymbol} alt="close symbol" />
       </button>
       <div className="photo-details-modal__images">
-        <PhotoFavButton item={props.item} setLikedPicture={props.setLikedPicture} />
+        <PhotoFavButton item={props.item} liked={props.liked} setLikedPicture={props.setLikedPicture} />
         <img className="photo-details-modal__image" src={props.item.urls.full} alt="" />
         <div className="photo-details-modal__photographer-details">
           <img className="photo-details-modal__photographer-profile" src={props.item.user.profile} alt="" />
@@ -31,7 +31,7 @@ const PhotoDetailsModal = (props) => {
         <div className="photo-details-modal__header"> SIMILAR PHOTOS </div>
 
         <div className="photo-details-modal__image" >
-          <PhotoList photos={similarPhotos} setLikedPicture={props.setLikedPicture} openPreview = {props.openPreview}/>
+          <PhotoList photos={similarPhotos} liked={props.liked} setLikedPicture={props.setLikedPicture} openPreview = {props.openPreview}/>
         </div>
       </div>
     </div>
